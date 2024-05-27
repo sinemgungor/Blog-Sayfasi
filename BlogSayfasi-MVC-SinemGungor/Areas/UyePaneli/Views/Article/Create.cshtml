@@ -1,0 +1,46 @@
+﻿
+
+ @model BlogSayfasi_MVC_SinemGungor.Models.VM.ArticleVM
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="text-center mb-4">Makale Ekle</h1>
+
+            <form asp-action="Create" method="post" class="border p-4 bg-light rounded">
+                <div class="form-group mb-3">
+                    <label for="Title" class="form-label">Başlık</label>
+                    <input type="text" class="form-control" id="Title" name="Title" asp-for="Title" placeholder="Makale başlığını girin" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="Content" class="form-label">İçerik</label>
+                    <textarea class="form-control" id="Content" name="Content" asp-for="Content" rows="10" placeholder="Makale içeriğini girin"></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="Categories" class="form-label">Kategoriler</label>
+                    <select class="form-select" id="Categories" name="SelectedCategories" asp-for="SelectedCategories" multiple>
+                        @foreach (var category in ViewBag.Categories)
+                        {
+                            <option value="@category.Id">@category.Name</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

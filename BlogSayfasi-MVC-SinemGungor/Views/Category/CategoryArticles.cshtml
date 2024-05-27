@@ -1,0 +1,32 @@
+﻿
+
+@model BlogSayfasi_MVC_SinemGungor.Models.Category
+
+<h1 class="text-center mt-5">@Model.Name Kategorisine Ait Makaleler</h1>
+
+@if (Model.ArticleCategories.Any())
+{
+    <div class="row">
+        @foreach (var articleCategory in Model.ArticleCategories)
+        {
+            <div class="col-md-4 d-flex align-items-stretch">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">@articleCategory.Article.Title</h5>
+                      
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="@Url.Action("Read", "Article", new { id = articleCategory.Article.Id, area = "UyePaneli" })" class="btn btn-sm btn-outline-secondary">Oku</a>
+                            </div>
+                            <small class="text-muted">Yazar: @articleCategory.Article.Author.UserName</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p class="text-center mt-3">Bu kategoriye ait makale bulunmamaktadır.</p>
+}

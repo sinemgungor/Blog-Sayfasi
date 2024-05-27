@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Email Doğrulama";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card text-center shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h2>@ViewData["Title"]</h2>
+                </div>
+                <div class="card-body">
+                    <p class="lead">Teşekkürler, emailiniz doğrulandı.</p>
+                    <a asp-action="Login" asp-controller="Login" class="btn btn-success mt-3">Giriş Yap</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

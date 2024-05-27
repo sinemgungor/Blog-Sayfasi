@@ -1,0 +1,67 @@
+﻿
+
+
+@model BlogSayfasi_MVC_SinemGungor.Models.VM.LoginVM
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">Giriş Yap</h2>
+            <form asp-action="Login">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Password" class="control-label"></label>
+                    <div class="input-group">
+                        <input asp-for="Password" class="form-control" type="password" placeholder="Şifre" id="passwordField" />
+                        <button type="button" class="btn btn-outline-secondary" id="togglePassword" onclick="togglePasswordVisibility()">Göster</button>
+                    </div>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group text-center mt-2">
+                    <input type="submit" value="Giriş Yap" class="btn btn-primary btn-block" />
+                </div>
+            </form>
+            <div class="text-center mt-3">
+                <a asp-controller="Register" asp-action="Register">Hesabınız yok mu? Kayıt Olun</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<script>
+    function togglePasswordVisibility() {
+        var passwordField = document.getElementById("passwordField");
+        var toggleButton = document.getElementById("togglePassword");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleButton.textContent = "Gizle";
+        } else {
+            passwordField.type = "password";
+            toggleButton.textContent = "Göster";
+        }
+    }
+</script>
+
+
+
+
+

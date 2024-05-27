@@ -1,0 +1,86 @@
+﻿
+@model BlogSayfasi_MVC_SinemGungor.Models.VM.AnasayfaVM
+
+<div class="container mt-5">
+    <h1 class="text-center">Hoşgeldiniz @User.Identity.Name!</h1>
+
+    @if (Model.FollowedCategories.Any())
+    {
+        <h2 class="mt-5">Takip Ettiğiniz Konularla İlgili Makaleler</h2>
+        <div class="row">
+            @foreach (var article in Model.FollowedTopicArticles)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <div class="card-body">
+                            <h5 class="card-title">@article.Title</h5>
+                            <p class="card-text">
+                                @foreach (var category in article.ArticleCategories.Select(ac => ac.Category))
+                                {
+                                    <span class="badge bg-secondary">@category.Name</span>
+                                }
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="@Url.Action("Read", "Article", new { id = article.Id, area = "UyePaneli" })" class="btn btn-sm btn-outline-secondary">Oku</a>
+                                </div>
+                                <small class="text-muted">Yazar: @article.Author.UserName</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+   
+    <hr />
+    <h2 class="mt-5">Tüm Makaleler</h2>
+    <div class="row">
+        @foreach (var article in Model.AllArticles)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">@article.Title</h5>
+                        <p class="card-text">
+                            @foreach (var category in article.ArticleCategories.Select(ac => ac.Category))
+                            {
+                                <span class="badge bg-secondary">@category.Name</span>
+                            }
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="@Url.Action("Read", "Article", new { id = article.Id, area = "UyePaneli" })" class="btn btn-sm btn-outline-secondary">Oku</a>
+                            </div>
+                            <small class="text-muted">Yazar: @article.Author.UserName</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <hr />
+    <h2 class="mt-5">Takip Ettiğiniz Kategoriler</h2>
+    <div class="row">
+        @foreach (var topic in Model.FollowedCategories)
+        {
+            <div class="col-md-3">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">@topic.Name</h5>
+                        <form asp-action="Unfollow" method="post" class="d-inline">
+                            <input type="hidden" name="id" value="@topic.Id" />
+                            <button type="submit" class="btn btn-sm btn-danger">Takipten Çıkar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

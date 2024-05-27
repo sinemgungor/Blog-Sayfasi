@@ -1,0 +1,83 @@
+﻿
+
+@model BlogSayfasi_MVC_SinemGungor.Models.VM.CategorySelectionVM
+@if (TempData["CategoryAddMessage"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["CategoryAddMessage"]
+    </div>
+}
+@if (TempData["CategoryUnfollowMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["CategoryUnfollowMessage"]
+    </div>
+}
+@if (TempData["CategorySelectMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["CategorySelectMessage"]
+    </div>
+}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="text-center mb-4">Takip Edebileceğiniz Kategoriler</h1>
+
+            <form asp-action="SelectCategories" method="post">
+                <div class="form-group">
+                    <label for="SelectedCategoryIds">Kategoriler</label>
+                    <select class="form-control" id="SelectedCategoryIds" name="SelectedCategoryIds" multiple>
+                        @foreach (var category in Model.Categories)
+                        {
+                            @Html.Raw($"<option value=\"{category.Id}\" {(Model.SelectedCategoryIds.Contains(category.Id) ? "selected" : "")}>{category.Name}</option>")
+                        }
+                    </select>
+                </div>
+                <div class="mt-3 text-center">
+                <button type="submit" class="btn btn-primary " >Takip Et</button>
+                </div>
+            </form>
+            <hr />
+            <h2 class="text-center mt-5">Yeni Kategori Ekle</h2>
+            <form asp-action="AddCategory" method="post" class="form-inline justify-content-center mt-3">
+                <div class="form-group mr-2">
+                    <input type="text" class="form-control" name="newCategoryName" placeholder="Kategori Adı" required />
+                </div>
+                <div class="mt-3 text-center">
+                    <button type="submit" class="btn btn-primary mt-3 text-center">Ekle</button>
+                </div>
+            </form>
+            <hr />
+            @if (Model.SelectedCategoryIds.Any())
+            {
+                <h2 class="text-center mt-5">Takip Ettiğiniz Kategoriler</h2>
+                <div class="row justify-content-center">
+                    @foreach (var category in Model.Categories.Where(c => Model.SelectedCategoryIds.Contains(c.Id)))
+                    {
+                        <div class="col-md-3">
+                            <div class="card mb-4 box-shadow">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">@category.Name</h5>
+                                    <form asp-action="Unfollow" method="post" class="d-inline">
+                                        <input type="hidden" name="id" value="@category.Id" />
+                                        <button type="submit" class="btn btn-sm btn-danger">Takipten Çıkar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+ 

@@ -1,0 +1,21 @@
+﻿
+
+@{
+    ViewData["Title"] = "Hesabı Sil";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm p-4">
+                <h1 class="text-center">Hesabı Sil</h1>
+                <hr />
+                <p class="text-center">Hesabınızı silmek istediğinize emin misiniz?</p>
+                <form asp-action="DeleteAccount" method="post" class="text-center">
+                    <button type="submit" class="btn btn-danger mx-2">Evet, hesabımı sil</button>
+                    <a asp-action="Profile" asp-route-username="@User.Identity.Name" class="btn btn-secondary mx-2">İptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

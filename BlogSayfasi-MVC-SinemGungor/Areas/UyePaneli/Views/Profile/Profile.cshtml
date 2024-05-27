@@ -1,0 +1,40 @@
+﻿
+@model BlogSayfasi_MVC_SinemGungor.Models.User
+
+<h1 class="text-center mt-4">Profil</h1>
+<hr />
+
+@if (TempData["infoguncelle"] != null)
+{
+    <div class="alert alert-success text-center mb-2">@TempData["infoguncelle"]</div>
+}
+@if (TempData["infosil"] != null)
+{
+    <div class="alert alert-danger text-center mb-2">@TempData["infosil"]</div>
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="text-center mb-3">
+                        <img src="@Model.ProfilePictureUrl" class="img-fluid rounded-circle" alt="Profil Resmi" style="max-width: 150px;" />
+                    </div>
+                    <div class="user-info">
+                        <p><strong>ID:</strong> @Model.Id</p>
+                        <p><strong>Ad:</strong> @Model.FirstName</p>
+                        <p><strong>Soyad:</strong> @Model.LastName</p>
+                        <p><strong>Kullanıcı Adı:</strong> @Model.UserName</p>
+                        <p><strong>Email:</strong> @Model.Email</p>
+                        <p><strong>Açıklama:</strong> @Model.About</p>
+                    </div>
+                    <div class="d-flex justify-content-between mt-4">
+                        <a class="btn btn-warning" asp-controller="Profile" asp-action="EditProfile">Güncelle</a>
+                        <a class="btn btn-danger" asp-controller="Profile" asp-action="ConfirmDelete">Hesabı Sil</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

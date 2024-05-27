@@ -1,0 +1,60 @@
+﻿        @model BlogSayfasi_MVC_SinemGungor.Models.User
+
+@{
+    ViewData["Title"] = "Profil Düzenle";
+}
+
+<h1 class="text-center mt-4">Profil Düzenle</h1>
+<hr />
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form asp-action="EditProfile" method="post" enctype="multipart/form-data" class="card shadow-sm p-4">
+                <div class="form-group mb-3">
+                    <label>Ad</label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label>Soyad</label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label>Kullanıcı Adı</label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label>Email</label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label>Hakkımda</label>
+                    <textarea asp-for="About" class="form-control"></textarea>
+                    <span asp-validation-for="About" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label>Url</label>
+                    <input asp-for="Url" class="form-control" />
+                    <span asp-validation-for="Url" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label>Profil Resmi</label>
+                    <br />
+                    <input type="file" name="ProfilePicture" class="form-control-file" />
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

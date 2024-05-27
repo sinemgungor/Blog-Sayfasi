@@ -1,0 +1,27 @@
+﻿
+ @model BlogSayfasi_MVC_SinemGungor.Models.User
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm p-4">
+                <div class="text-center">
+                    <img src="@Model.ProfilePictureUrl" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 150px; max-height: 150px;" />
+                    <h1>@Model.FirstName @Model.LastName</h1>
+                    <h3 class="text-muted">@Model.About</h3>
+                </div>
+                <hr />
+                <h2>Yayınlanan Makaleler</h2>
+                <ul class="list-group">
+                    @foreach (var article in Model.Articles.OrderByDescending(a => a.CreatedTime))
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a asp-action="Read" asp-route-id="@article.Id">@article.Title</a>
+                            <span class="text-muted">@article.CreatedTime.ToString("dd/MM/yyyy")</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
